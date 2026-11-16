@@ -107,18 +107,6 @@ select {
   background-repeat: no-repeat;
 }
 
-.remove {
-  border: 0;
-  background: none;
-  color: var(--muted);
-  font-size: 1.3rem;
-  line-height: 1;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-.remove:hover { background: var(--bg); color: var(--ink); }
 
 /* Add form */
 .add {
