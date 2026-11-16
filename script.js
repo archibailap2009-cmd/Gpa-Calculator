@@ -13,8 +13,8 @@ const GRADES = [
   { label: "F",  value: 0 },
 ];
 
-// Предметы по умолчанию. Добавить или поменять кредиты можно прямо здесь.
-const DEFAULT_COURSES = [
+// Список предметов. Поменять предметы или кредиты можно прямо здесь.
+const COURSES = [
   { id: "eng",   name: "English Composition", credits: 6 },
   { id: "avd",   name: "АВД",                 credits: 6 },
   { id: "arv",   name: "АРВ",                 credits: 3 },
@@ -35,11 +35,12 @@ const listEl = $("list");
 let state = load();
 
 function load() {
+  let grades = {};
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (saved && Array.isArray(saved.courses)) return saved;
+    if (saved && saved.grades) grades = saved.grades;
   } catch (e) { /* localStorage недоступен — работаем без сохранения */ }
-  return { courses: DEFAULT_COURSES.map((c) => ({ ...c })), grades: {} };
+  return { courses: COURSES.map((c) => ({ ...c })), grades };
 }
 
 function save() {
@@ -87,22 +88,6 @@ function render() {
     });
     pick.appendChild(select);
 
-    // Кнопка удаления только у добавленных вручную предметов
-    if (!DEFAULT_COURSES.some((d) => d.id === course.id)) {
-      const rm = document.createElement("button");
-      rm.type = "button";
-      rm.className = "remove";
-      rm.setAttribute("aria-label", `Удалить ${course.name}`);
-      rm.textContent = "×";
-      rm.addEventListener("click", () => {
-        state.courses = state.courses.filter((c) => c.id !== course.id);
-        delete state.grades[course.id];
-        save();
-        render();
-      });
-      pick.appendChild(rm);
-    }
-
     li.append(name, credits, pick);
     listEl.appendChild(li);
   });
@@ -131,18 +116,6 @@ function update() {
   $("points").textContent = points.toFixed(2);
   $("bar-fill").style.width = gpa === null ? "0%" : `${(gpa / 4) * 100}%`;
 }
-
-$("add-form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const name = $("add-name").value.trim();
-  const credits = parseInt($("add-credits").value, 10);
-  if (!name || !credits || credits < 1) return;
-
-  state.courses.push({ id: "c" + Date.now(), name, credits });
-  save();
-  $("add-name").value = "";
-  render();
-});
 
 $("reset").addEventListener("click", () => {
   state.grades = {};
