@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GPA калькулятор</title>
+  <meta name="description" content="Выбери оценки по предметам и сразу увидишь свой GPA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="layout">
+    <section class="courses" aria-labelledby="title">
+      <header class="head">
+        <h1 id="title">GPA калькулятор</h1>
+        <p class="lead">Выбери оценку по каждому предмету. Предметы без оценки в расчёт не входят.</p>
+      </header>
+
+      <ul id="list" class="list"></ul>
+
+      <form id="add-form" class="add" autocomplete="off">
+        <input id="add-name" type="text" placeholder="Название предмета" aria-label="Название предмета" required>
+        <input id="add-credits" type="number" min="1" max="12" value="3" aria-label="Кредиты" required>
+        <button type="submit">Добавить предмет</button>
+      </form>
+    </section>
+
+    <aside class="result" aria-live="polite">
+      <p class="label">Твой GPA</p>
+      <p id="gpa" class="gpa">—</p>
+      <div class="bar" role="img" aria-label="Шкала GPA от 0 до 4">
+        <span id="bar-fill"></span>
+      </div>
+      <dl class="stats">
+        <div><dt>Кредиты в расчёте</dt><dd id="counted">0</dd></div>
+        <div><dt>Всего кредитов</dt><dd id="total">0</dd></div>
+        <div><dt>Баллы за кредиты</dt><dd id="points">0</dd></div>
+      </dl>
+      <button id="reset" type="button" class="ghost">Сбросить оценки</button>
+    </aside>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
