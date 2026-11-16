@@ -108,24 +108,6 @@ select {
 }
 
 
-/* Add form */
-.add {
-  display: grid;
-  grid-template-columns: 1fr 84px auto;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-input {
-  font: inherit;
-  color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 10px 12px;
-  min-width: 0;
-}
-input::placeholder { color: var(--muted); }
 
 button {
   font: inherit;
@@ -198,8 +180,6 @@ button.ghost {
   .row { grid-template-columns: 1fr auto; }
   .credits { grid-column: 1; grid-row: 2; }
   .pick { grid-column: 2; grid-row: 1 / span 2; }
-  .add { grid-template-columns: 1fr 84px; }
-  .add button { grid-column: 1 / -1; }
 }
 
 @media (prefers-reduced-motion: reduce) {
